@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dokdo&display=swap" rel="stylesheet">
+  <title>Katy Dowlin</title>
+  <style>
+  
+    body {
+      text-align: center;
+      background: url("https://static.vecteezy.com/system/resources/previews/003/549/556/original/space-galaxy-background-free-vector.jpg");
+      
+      background-size: cover;
+      background-position: center;
+      color: #8aecef;
+      font-family: sans-serif;
+    }
+    p {
+      font-size: 45px;
+      font-family: 'Dokdo', cursive;
+    }
+    input {
+      border: 0;
+      padding: 10px;
+      font-size: 18px;
+    }
+    input[type="submit"] {
+      background: purple;
+      color: #8aecef;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://easydrawingguides.com/wp-content/uploads/2017/02/How-to-draw-a-cartoon-girl-20.png">
+  <p>Hi! I'm Katy, a NYC Student. Say hello!</p>
+  <input  placeholder="Your Name" id="Name">
+   <input type="email" placeholder="Your email" id="Email">
+   <input type="submit" id="submit">
+ 		
+ 
+ 
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyC-dOjUVsjb0HrMnoCqwGdBs4C6NlSvp3M",
+    authDomain: "kacey-proj-1.firebaseapp.com",
+    databaseURL: "https://kacey-proj-1-default-rtdb.firebaseio.com",
+    projectId: "kacey-proj-1",
+    storageBucket: "kacey-proj-1.appspot.com",
+    messagingSenderId: "695995395936",
+    appId: "1:695995395936:web:f6a22570c02beb27de3805",
+    measurementId: "G-1L4F9FWGMV"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const db = getDatabase(app);
+
+	
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+document.querySelector('#submit').addEventListener('click', Submit)
+	
+function Submit() {
+  const timestamp = buildTimestamp()
+  
+  set(ref(db, timestamp), {
+	  Name: Name.value,
+      email: Email.value,
+  });
+
+  Name.value = ""
+  Email.value = ""
+  
+function buildTimestamp() {
+  const now = new Date();
+  let timestamp = now.getFullYear().toString() + "/";
+  //const month = now.toLocaleString('default', { month: 'long' });
+
+  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+  month = month.toString()
+  month = addLeadingZero(month)
+  timestamp += month + "/"; 
+
+  let date = now.getDate().toString()
+  date = addLeadingZero(date)
+  timestamp += date + "/";
+
+  let hours = now.getHours().toString()
+  hours = addLeadingZero(hours)
+  timestamp += hours + ":";
+
+  let minutes = now.getMinutes().toString()
+  minutes = addLeadingZero(minutes)
+  timestamp += minutes + ":";
+
+  let seconds = now.getSeconds().toString()
+  seconds = addLeadingZero(seconds)
+  timestamp += seconds;
+
+  return timestamp
+}
+
+function addLeadingZero(units) {
+	if (units.length < 2) {
+		units = "0" + units
+	}
+	return units
+}
+  
+}
+
+	  
+	  
+
+	
+	function buildTimestamp() {
+	  const now = new Date();
+	  let timestamp = now.getFullYear().toString() + "/";
+	  //const month = now.toLocaleString('default', { month: 'long' });
+
+	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+	  month = month.toString()
+	  month = addLeadingZero(month)
+	  timestamp += month + "/"; 
+
+	  let date = now.getDate().toString()
+	  date = addLeadingZero(date)
+	  timestamp += date + "/";
+
+	  let hours = now.getHours().toString()
+	  hours = addLeadingZero(hours)
+	  timestamp += hours + ":";
+
+	  let minutes = now.getMinutes().toString()
+	  minutes = addLeadingZero(minutes)
+	  timestamp += minutes + ":";
+
+	  let seconds = now.getSeconds().toString()
+	  seconds = addLeadingZero(seconds)
+	  timestamp += seconds;
+  
+	  return timestamp
+	}
+	
+	function addLeadingZero(units) {
+		if (units.length < 2) {
+			units = "0" + units
+		}
+		return units
+	}
+	
+	
+  </script>
+	
+
+	
+</body>
