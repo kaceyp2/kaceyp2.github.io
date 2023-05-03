@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+ <title>Kacey's Koffee</title>
+<style>
+body {
+  font-family: 'Mali', cursive;
+  margin: 0 auto;
+  max-width: 600px;
+  background: #9a7b4f;
+}
+div {
+  height: 200px;
+  background-size: cover;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 12px;
+}
+h1 {
+  font-family: 'Patrick Hand SC', cursive;
+  text-align: center;
+  font-size: 75px;
+  color: #654321;
+  margin: 60px 0 0 0;
+}
+h2 {
+  text-align: center;
+  color: #654321;
+  margin: 0px 0 70px 0;
+  font-family: 'Patrick Hand SC', cursive;
+}
+p {
+  color: rgba(255,255,255,1);
+  background: black;
+  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -webkit-linear-gradient(bottom, rgba(255,235,205,), rgba(255,235,205, 0.4));
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 150px;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+.first{
+  background-image: url("https://cms.qz.com/wp-content/uploads/2016/07/coffee.jpg?quality=75&strip=all&w=1400");
+}
+.second{
+  background-image: url("http://ghk.h-cdn.co/assets/15/27/1600x800/landscape-1435860444-iced-coffees-index.jpg");
+}
+.dessert{
+  background-image: url("http://del.h-cdn.co/assets/16/50/1600x800/landscape-1481926538-brownie-batter-hot-chocolate-3.jpg");
+}
+.price {
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+input {
+	font-size: 22px;
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>Kacey's Koffee</h1>
+<h2>Luxury Coffee</h2>
+<div class="first">
+	<input class="quantities" type="number" min="0" style="width: 50px">
+  <p>Pumpkin Spice Cappuccino <span class="price">$6</span><br />
+  <small>creamy and smooth, made with Deep Rich dark roast coffee and the perfect touch of autumn spices.  </small></p>
+</div>
+
+<div class="second">
+	<input class="quantities" type="number" min="0" style="width: 50px" >
+  <p>Cold Brew Black Iced Coffee <span class="price">$5</span><br />
+  <small>its less acidic than iced coffee and much stronger. The concentrate produced is twice as caffeinated as regular java.</small></p>
+</div>
+  
+<div class="dessert">
+	<input class="quantities" type="number" min="0" style="width: 50px" >
+  <p>Brownie Batter Hot Chocolate <span class="price">$4</span><br />
+  <small>made with dark, semisweet, or bittersweet chocolate grated or chopped into small pieces and stirred.</small></p>
+</div>
+<br><br>
+
+    <input  placeholder="Your Name" id="Name">
+    <input type="email" placeholder="Your email" id="Email">
+    <input type="submit" id="submit">
+  
+<br><br>
+<script>
+  $('div').on('click', function() {
+      $(this).toggleClass('show-description');
+  });
+</script>
+
+ 
+  
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB8Imqj1G1_vW32uxY-OC2nFhHmGz8a6ZA",
+    authDomain: "kacey-proj-3.firebaseapp.com",
+    databaseURL: "https://kacey-proj-3-default-rtdb.firebaseio.com",
+    projectId: "kacey-proj-3",
+    storageBucket: "kacey-proj-3.appspot.com",
+    messagingSenderId: "878607985972",
+    appId: "1:878607985972:web:8c2a5bd09e8f3d40384961"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+  const Name = document.querySelector("#Name") 
+  const Email = document.querySelector("#Email")
+
+  document.querySelector('#submit').addEventListener('click', Submit)
+  const quantities = document.querySelectorAll(".quantities")
+
+  const prices = document.querySelectorAll(".price") 
+  const itemsList = ["Pumpkin", "Coldbrew", "Brownie"]
+	function Submit() {
+	  	  const timestamp = buildTimestamp()
+		  let total = 0
+		  let cart = { }
+		  for  (let i=0; i<quantities.length; i=i+1) {
+		  	if (quantities[i].value != "0" && quantities[i].value != "") {
+	let price = prices[i].innerHTML.replace('$', '')
+				  total = total + quantities[i].value * price 	
+		  		cart[itemsList[i]] = parseInt(quantities[i].value) 
+		  	}
+		  	quantities[i].value = ""
+		  }
+	  
+	  	  set(ref(db, timestamp), {
+	  		  Name: Name.value,
+	  	      email: Email.value,
+	totalPrice: total,
+			  paid: "not yet",
+	cart: cart
+		  
+	  	  });
+
+	  	  Name.value = ""
+	  	  Email.value = ""
+	  	}
+	
+	    function buildTimestamp() {
+	    	  const now = new Date();
+	    	  let timestamp = now.getFullYear().toString() + "/";
+	    	  //const month = now.toLocaleString('default', { month: 'long' });
+
+	    	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+	    	  month = month.toString()
+	    	  month = addLeadingZero(month)
+	    	  timestamp += month + "/"; 
+
+	    	  let date = now.getDate().toString()
+	    	  date = addLeadingZero(date)
+	    	  timestamp += date + "/";
+
+	    	  let hours = now.getHours().toString()
+	    	  hours = addLeadingZero(hours)
+	    	  timestamp += hours + ":";
+
+	    	  let minutes = now.getMinutes().toString()
+	    	  minutes = addLeadingZero(minutes)
+	    	  timestamp += minutes + ":";
+
+	    	  let seconds = now.getSeconds().toString()
+	    	  seconds = addLeadingZero(seconds)
+	    	  timestamp += seconds;
+  
+	    	  return timestamp
+	    	}
+	
+	    	function addLeadingZero(units) {
+	    		if (units.length < 2) {
+	    			units = "0" + units
+	    		}
+	    		return units
+	    	}
+	</script>
+</body>
